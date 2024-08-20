@@ -9,7 +9,9 @@
 </p>
 
 <p align="center">
-Steago enables teams to work with AI and get things done. We're starting off with Steago Chat, but we're building a LOT more. 🚀
+Steago enables teams to work with AI and get things done.
+<br/>
+We're starting off with Steago Chat, but we're building a LOT more. 🚀
 <br/><br/>
 </p>
 
