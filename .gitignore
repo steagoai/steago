@@ -48,6 +48,9 @@ out
 # Py cache
 __pycache__
 
+# Env files
+.env.*
+
 # Scratchpad and archives (Augustus tends to create these)
 scratchpad.txt
 scratchpad/
