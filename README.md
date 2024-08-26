@@ -10,7 +10,7 @@
 
 
 <img src="https://pub-7f125aa962f946e59ad09e268c078390.r2.dev/steago-gh-header.png?" alt="Steago Screenshot" />
-<br/><br/>
+<br/>
 
 <p align="center">
 Steago enables teams to work with AI and get things done.
