@@ -50,6 +50,7 @@ __pycache__
 
 # Env files
 .env.*
+!.env.sample
 
 # Scratchpad and archives (Augustus tends to create these)
 scratchpad.txt
