@@ -5,15 +5,30 @@ import { getNavigatorLanguage } from './browser';
 
 // --------------------------------------------------------------------------------------
 
+/**
+ * Containers for the actual plain and authenticated clients.
+ * This mechanism helps us switch out the default platform provided clients if we need to.
+ */
 export let createPlatformPlainClient: () => Promise<KyInstance>;
 export let createPlatformAuthClient: (
   workspaceUUID: string | null
 ) => Promise<KyInstance>;
 
+// --------------------------------------------------------------------------------------
+
+/**
+ * Initializes the clients with the given options.
+ *
+ * @param {Object} options - The options for initializing the clients.
+ * @param {boolean} [options.withDefaults=false] - Whether to use default client functions.
+ * @param {Function|null} [options.createPlainClientFn=null] - The client function for creating a plain client.
+ * @param {Function|null} [options.createAuthClientFn=null] - The client function for creating an authenticated client.
+ * @throws {Error} If createPlainClientFn or createAuthClientFn is null and withDefaults is false.
+ */
 export function initializeClients({
-  withDefaults = false,
-  createPlainClientFn = null,
-  createAuthClientFn = null,
+  withDefaults = false, // Whether to use default client functions
+  createPlainClientFn = null, // The client function for creating a plain client
+  createAuthClientFn = null, // The client function for creating an authenticated client
 }: {
   withDefaults?: boolean;
   createPlainClientFn?: null | (() => Promise<KyInstance>);
@@ -21,21 +36,25 @@ export function initializeClients({
     | null
     | ((workspaceUUID: string | null) => Promise<KyInstance>);
 }) {
+  // Check if the clients are already initialized
   if (!!createPlatformPlainClient && !!createPlatformAuthClient) {
-    // Already initialized
+    // Clients are already initialized, return early
     return;
   }
+
+  // Check if withDefaults is true
   if (withDefaults) {
-    // console.log('Initializing clients with default functions');
+    // Use default client functions
     createPlatformPlainClient = createDefaultPlatformPlainClient;
     createPlatformAuthClient = createDefaultPlatformAuthClient;
   } else {
+    // Check if createPlainClientFn or createAuthClientFn is null
     if (createPlainClientFn === null || createAuthClientFn === null) {
       throw new Error(
         'createPlainClientFn and createAuthClientFn cannot be null'
       );
     }
-    // console.log('Initializing clients with given functions');
+    // Use the given client functions
     createPlatformPlainClient = createPlainClientFn;
     createPlatformAuthClient = createAuthClientFn;
   }
