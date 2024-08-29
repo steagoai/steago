@@ -10,7 +10,7 @@
         "src/*"
       ],
       "@steago/ui/*": [
-        "../../../packages/ui/src/*"
+        "../ui/src/*"
       ]
     }
   },
