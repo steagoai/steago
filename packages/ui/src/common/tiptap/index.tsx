@@ -9,7 +9,13 @@ import { PiCodeBlockBold } from 'react-icons/pi';
 import { createLowlight, common } from 'lowlight';
 import Placeholder from '@tiptap/extension-placeholder';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { useEditor, EditorContent, ReactNodeViewRenderer } from '@tiptap/react';
 import {
   LuBold,
@@ -219,6 +225,11 @@ const TipTap = forwardRef<TipTapMethods, TipTapProps>(
      * */
     const [editorContent, setEditorContent] = useState('');
 
+    const onEnterKeyRef = useRef(onEnterKey);
+    useEffect(() => {
+      onEnterKeyRef.current = onEnterKey;
+    }, [onEnterKey]);
+
     /**
      * --------------------------------------------------------------------------------------------
      * Custom Extension for
@@ -270,8 +281,8 @@ const TipTap = forwardRef<TipTapMethods, TipTapProps>(
           Enter: () => {
             if (!this.storage.isShiftKeyPressed) {
               // console.log("Calling onEnterKey...");
-              if (onEnterKey) {
-                onEnterKey(
+              if (onEnterKeyRef.current) {
+                onEnterKeyRef.current(
                   {
                     html: this.editor.getHTML(),
                     json: this.editor.getJSON(),
