@@ -204,6 +204,13 @@ interface TipTapProps {
   // placeholder?: string;
 }
 
+export type SteagoEditorContent = {
+  html: string;
+  json: object;
+  text: string;
+  md: string;
+};
+
 const TipTap = forwardRef<TipTapMethods, TipTapProps>(
   (
     {
