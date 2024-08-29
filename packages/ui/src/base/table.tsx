@@ -1,9 +1,10 @@
 'use client';
 
 import clsx from 'clsx';
-import type React from 'react';
-import { createContext, useContext, useState } from 'react';
 import { Link } from './link';
+import type React from 'react';
+import { LinkProps } from 'next/link';
+import { createContext, useContext, useState } from 'react';
 
 const TableContext = createContext<{
   bleed: boolean;
@@ -42,6 +43,7 @@ export function Table({
       <div className="flow-root">
         <div
           {...props}
+          // eslint-disable-next-line tailwindcss/enforces-negative-arbitrary-values
           className={clsx(
             className,
             '-mx-[--gutter] overflow-x-auto whitespace-nowrap'
@@ -96,7 +98,7 @@ export function TableRow({
   className,
   ...props
 }: {
-  href?: string;
+  href?: LinkProps['href'];
   target?: string;
   title?: string;
 } & React.ComponentPropsWithoutRef<'tr'>) {
