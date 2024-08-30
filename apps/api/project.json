@@ -1,0 +1,82 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/api",
+  "targets": {
+    "lock": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "poetry lock --no-update",
+        "cwd": "api"
+      }
+    },
+    "add": {
+      "executor": "@nxlv/python:add",
+      "options": {}
+    },
+    "update": {
+      "executor": "@nxlv/python:update",
+      "options": {}
+    },
+    "remove": {
+      "executor": "@nxlv/python:remove",
+      "options": {}
+    },
+    "build": {
+      "executor": "@nxlv/python:build",
+      "outputs": ["{projectRoot}/dist"],
+      "options": {
+        "outputPath": "{projectRoot}/dist",
+        "publish": false,
+        "lockedVersions": true,
+        "bundleLocalDependencies": true
+      }
+    },
+    "publish": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "dotenvx run --env-file ./.env.publish -- poetry run python -m twine upload dist/* --verbose",
+        "cwd": "apps/api"
+      }
+    },
+    "install": {
+      "executor": "@nxlv/python:install",
+      "options": {
+        "silent": false,
+        "args": "",
+        "cacheDir": ".cache/pypoetry",
+        "verbose": false,
+        "debug": false
+      }
+    },
+    "lint": {
+      "executor": "@nxlv/python:flake8",
+      "outputs": ["{workspaceRoot}/reports/api/pylint.txt"],
+      "options": {
+        "outputFile": "reports/api/pylint.txt"
+      }
+    },
+    "test": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": [
+        "{workspaceRoot}/reports/api/unittests",
+        "{workspaceRoot}/coverage/api"
+      ],
+      "options": {
+        "command": "poetry run pytest tests/",
+        "cwd": "apps/api"
+      }
+    },
+    "dev": {
+      "executor": "@nxlv/python:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "dotenvx run --env-file ./.env -- poetry run flask run --debugger --reload --port=9270",
+        "cwd": "apps/api"
+      }
+    }
+  },
+  "tags": []
+}
