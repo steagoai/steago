@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* @media (prefers-color-scheme: dark) {
+  / * div, * /
+  .enable-dark-scrollbar {
+    color-scheme: dark;
+  }
+} */
+
+.steago-logo-slider {
+  width: 100px;
+  margin-right: 4px;
+  /* additional animation for fade in: 500ms linear forwards steago-logo-fade-in, */
+  /* opacity: 0; */
+  animation: 200ms ease-out 1s steago-logo-slide-out forwards;
+}
+
+/* @keyframes steago-logo-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+} */
+
+@keyframes steago-logo-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  to {
+    opacity: 0;
+    margin-right: -100px;
+    transform: translateX(-100%);
+  }
+}
