@@ -9,8 +9,8 @@ interface PlatformStore {
   setAccessToken: (accessToken: string) => void;
   setRefreshToken: (refreshToken: string) => void;
   clearWorkspaceSession: () => void;
-  chatNewThreads: Record<string, { createdAt: number }>;
-  setChatNewThread: (newThreadUUID: string) => void;
+  chatNewThreads: Record<string, { createdAt: number; channelUUID: string }>;
+  setChatNewThread: (newThreadUUID: string, channelUUID: string) => void;
   removeChatNewThread: (threadUUID: string) => void;
   cleanUpStaleNewThreads: (seconds: number) => void;
 }
@@ -36,10 +36,11 @@ export const usePlatformStore = create<PlatformStore>()(
         }),
       // Chat threads
       chatNewThreads: {},
-      setChatNewThread: (newThreadUUID: string) =>
+      setChatNewThread: (newThreadUUID: string, channelUUID: string) =>
         set((state: PlatformStore) => {
           state.chatNewThreads[newThreadUUID] = {
             createdAt: Date.now(),
+            channelUUID: channelUUID,
           };
         }),
       removeChatNewThread: (threadUUID: string) =>
