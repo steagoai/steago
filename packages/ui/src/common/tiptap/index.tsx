@@ -178,23 +178,24 @@ const proseTailwindClasses: string[] = [
  * Default Editable TipTap
  * ================================================================================================
  */
-interface MessagePacket {
+
+export type SteagoEditorContent = {
   html: string;
   json: object;
   text: string;
   md: string;
-}
+};
 
-interface TipTapMethods {
+export interface TipTapMethods {
   setIsHumanOnly: (value: boolean) => void;
-  clearEditor: (value: boolean) => void;
+  clearEditor: () => void;
 }
 
 interface TipTapProps {
   className?: string;
-  setMessage?: (messagePacket: MessagePacket) => void;
+  setMessage?: (content: SteagoEditorContent) => void;
   onEnterKey?: (
-    messagePacket: MessagePacket,
+    content: SteagoEditorContent,
     isHumanOnlyMessage?: boolean | undefined
   ) => void;
 
@@ -203,13 +204,6 @@ interface TipTapProps {
   trackHumanState?: boolean;
   // placeholder?: string;
 }
-
-export type SteagoEditorContent = {
-  html: string;
-  json: object;
-  text: string;
-  md: string;
-};
 
 const TipTap = forwardRef<TipTapMethods, TipTapProps>(
   (
@@ -406,7 +400,7 @@ const TipTap = forwardRef<TipTapMethods, TipTapProps>(
       editor?.commands.updateIsHumanOnlyState(value);
     };
 
-    const clearEditor = (value: boolean) => {
+    const clearEditor = () => {
       editor?.commands.clearContent();
     };
 
@@ -458,7 +452,7 @@ export default TipTap;
  * ================================================================================================
  */
 
-interface TipTapPlainReadOnlyMethods {
+export interface TipTapPlainReadOnlyMethods {
   updateContentMarkdown: (value: string) => void;
 }
 
