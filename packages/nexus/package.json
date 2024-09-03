@@ -10,6 +10,8 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
     "eslint": "^8.57.0",
