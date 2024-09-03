@@ -30,7 +30,16 @@ from flask_jwt_extended import JWTManager, jwt_required
 from flask_migrate import Migrate
 from modules.ai.utils.prompt import load_all_prompts
 from modules.core.db.primary import primary_db
-from modules.core.models.user import CoreUser
+from modules.core.models.user import (
+    CoreUser,
+    get_unified_user,
+    set_unified_user,
+)
+from modules.core.models.workspace import (
+    CoreWorkspace,
+    set_unified_workspace,
+    get_unified_workspace,
+)
 from modules.core.utils.auth import set_auth_required
 from modules.core.utils.cache import cache
 from modules.core.utils.compress import compress
@@ -319,7 +328,11 @@ from modules.chat.models.thread import ChatThread  # noqa: F401
 
 # Core
 # from modules.core.models.user import CoreUser --> already imported above
-from modules.core.models.workspace import CoreWorkspace  # noqa: F401
+# from modules.core.models.workspace import CoreWorkspace --> already imported above
+
+# Load unified models
+set_unified_user(CoreUser)
+set_unified_workspace(CoreWorkspace)
 
 # =====================================================================
 # PROMPTS
