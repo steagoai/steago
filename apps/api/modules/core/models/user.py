@@ -12,20 +12,6 @@ from ...core.utils.db import PrimaryDBUtils
 
 # =============================================================================
 
-global UnifiedUser
-
-
-def set_unified_user(cls):
-    global UnifiedUser
-    UnifiedUser = cls
-
-
-def get_unified_user():
-    return UnifiedUser
-
-
-# =============================================================================
-
 
 class CoreUser(db.Model, PrimaryDBUtils):
     """
