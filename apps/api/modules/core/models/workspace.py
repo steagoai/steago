@@ -9,19 +9,6 @@ from ...core.db.primary import primary_db as db
 from ...core.models.enums import WORKSPACE_STATUS
 from ...core.utils.db import PrimaryDBUtils
 
-# =============================================================================
-
-global UnifiedWorkspace
-
-
-def set_unified_workspace(cls):
-    global UnifiedWorkspace
-    UnifiedWorkspace = cls
-
-
-def get_unified_workspace():
-    return UnifiedWorkspace
-
 
 # =============================================================================
 
