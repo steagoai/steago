@@ -3,6 +3,18 @@ import { RxSlash } from 'react-icons/rx';
 import React, { useEffect } from 'react';
 import { Button } from '../../base/button';
 
+export interface FullPageCardProps {
+  workspaceName?: string;
+  userEmail?: string;
+  alertMiniTitle?: string;
+  alertLabel?: string;
+  alertDescription?: string;
+  nextActionLabel?: string;
+  nextActionLink?: string | null;
+  nextActionOnClick?: () => void;
+  onLoad?: () => void;
+}
+
 export default function FullPageCard({
   workspaceName = undefined,
   userEmail = undefined,
@@ -11,11 +23,11 @@ export default function FullPageCard({
   alertDescription = 'There was an error loading this page. Please try again.',
   nextActionLabel = 'Back to home',
   nextActionLink = null,
-  nextActionOnClick = null,
+  nextActionOnClick = undefined,
   onLoad = () => {
     // No-op
   },
-} = {}) {
+}: FullPageCardProps) {
   useEffect(() => {
     onLoad();
   }, [onLoad]);
