@@ -37,16 +37,51 @@ export function Card({
   }
 }
 
-export function CardHeader({ className, ...props }: { className?: string }) {
-  return <div className={clsx('p-6', className)} {...props} />;
+export function CardHeader({
+  className,
+  children,
+  ...props
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={clsx('p-6', className)} children={children} {...props} />
+  );
 }
 
-export function CardBody({ className, ...props }: { className?: string }) {
-  return <div className={clsx('px-6 py-4', className)} {...props} />;
+export function CardBody({
+  className,
+  children,
+  ...props
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={clsx('px-6 py-4', className)}
+      children={children}
+      {...props}
+    />
+  );
 }
 
-export function CardFooter({ className, ...props }: { className?: string }) {
-  return <div className={clsx('px-6 py-4', className)} {...props} />;
+export function CardFooter({
+  className,
+  children,
+  ...props
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={clsx('px-6 py-4', className)}
+      children={children}
+      {...props}
+    />
+  );
 }
 
 export function CardDivider({ className, ...props }: { className?: string }) {

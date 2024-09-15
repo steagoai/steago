@@ -1,6 +1,7 @@
 import * as Headless from '@headlessui/react';
 import clsx from 'clsx';
 import React, { forwardRef } from 'react';
+import { UrlObject } from 'url';
 import { Link } from './link';
 
 const styles = {
@@ -162,7 +163,12 @@ type ButtonProps = (
   | { color?: keyof typeof styles.colors; outline?: never; plain?: never }
   | { color?: never; outline: true; plain?: never }
   | { color?: never; outline?: never; plain: true }
-) & { className?: string; children: React.ReactNode; isSpinning?: boolean } & (
+) & {
+  className?: string;
+  children: React.ReactNode;
+  isSpinning?: boolean;
+  href?: string | UrlObject;
+} & (
     | Omit<Headless.ButtonProps, 'as' | 'className'>
     | Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>
   );
@@ -175,9 +181,10 @@ export const Button = forwardRef(function Button(
     className,
     children,
     isSpinning,
+    href,
     ...props
   }: ButtonProps,
-  ref: React.ForwardedRef<HTMLElement>
+  ref: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement> // Handle both anchor and button refs
 ) {
   const classes = clsx(
     className,
@@ -189,22 +196,24 @@ export const Button = forwardRef(function Button(
       : clsx(styles.solid, styles.colors[color ?? 'dark/zinc'])
   );
 
-  return 'href' in props ? (
+  // Conditionally render Link or Headless.Button based on href
+  return href ? (
     <Link
-      {...props}
+      href={href}
+      {...(props as React.ComponentPropsWithoutRef<'a'>)} // Cast to anchor tag props for Link
       className={classes}
-      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+      ref={ref as React.ForwardedRef<HTMLAnchorElement>} // Ensure ref is for anchor
     >
       <TouchTarget>{children}</TouchTarget>
     </Link>
   ) : (
     <Headless.Button
-      {...props}
+      {...(props as React.ComponentPropsWithoutRef<'button'>)} // Cast to button props for Headless.Button
       className={clsx(
         !classes.includes('cursor-') && 'cursor-pointer',
         classes
       )}
-      ref={ref}
+      ref={ref as React.ForwardedRef<HTMLButtonElement>} // Ensure ref is for button
     >
       <TouchTarget isSpinning={isSpinning ?? false}>{children}</TouchTarget>
     </Headless.Button>
