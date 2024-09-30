@@ -51,10 +51,12 @@ function MobileSidebar({
 export function StackedLayout({
   navbar,
   sidebar,
+  mobileTitle,
   children,
 }: React.PropsWithChildren<{
   navbar: React.ReactNode;
   sidebar: React.ReactNode;
+  mobileTitle: string | React.ReactNode;
 }>) {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -73,6 +75,7 @@ export function StackedLayout({
             aria-label="Open navigation"
           >
             <OpenMenuIcon />
+            {mobileTitle}
           </NavbarItem>
         </div>
         <div className="mx-auto min-w-0 max-w-7xl flex-1">{navbar}</div>

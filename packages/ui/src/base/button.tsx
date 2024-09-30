@@ -160,9 +160,13 @@ const styles = {
 };
 
 type ButtonProps = (
-  | { color?: keyof typeof styles.colors; outline?: never; plain?: never }
-  | { color?: never; outline: true; plain?: never }
-  | { color?: never; outline?: never; plain: true }
+  | {
+      color: keyof typeof styles.colors;
+      outline?: false | undefined | never;
+      plain?: false | undefined | never;
+    }
+  | { color?: undefined; outline: true; plain?: false | undefined | never }
+  | { color?: undefined; outline?: false | undefined | never; plain: true }
 ) & {
   className?: string;
   children: React.ReactNode;
@@ -176,8 +180,8 @@ type ButtonProps = (
 export const Button = forwardRef(function Button(
   {
     color,
-    outline,
-    plain,
+    outline = false,
+    plain = false,
     className,
     children,
     isSpinning,

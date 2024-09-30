@@ -13,7 +13,7 @@ export function Card({
 }: {
   className?: string;
   children: React.ReactNode;
-  href?: (UrlObject & string) | string | undefined;
+  href?: UrlObject | string;
   onClick?: () => void;
 }) {
   const cardClasses = clsx(
@@ -161,7 +161,7 @@ export function CardImage({
   alt: string;
   height: number;
   width: number;
-  radius: 'sm' | 'md' | 'lg' | 'full';
+  radius: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
   src: string;
   className?: string;
 }) {
@@ -170,6 +170,8 @@ export function CardImage({
       'rounded-sm': radius === 'sm',
       'rounded-md': radius === 'md',
       'rounded-lg': radius === 'lg',
+      'rounded-xl': radius === 'xl',
+      'rounded-2xl': radius === '2xl',
       'rounded-full': radius === 'full',
     },
     className

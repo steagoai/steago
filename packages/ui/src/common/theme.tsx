@@ -24,7 +24,9 @@ import {
 /**
  * Props type for the SetThemeDialog component.
  */
-type SetThemeDialogProps = object;
+type SetThemeDialogProps = {
+  appName?: string;
+};
 
 /**
  * Ref type for the SetThemeDialog component.
@@ -45,7 +47,7 @@ const SetThemeDialog = forwardRef<SetThemeDialogRef, SetThemeDialogProps>(
   // The forwardRef function is used to allow the parent component to get a reference to the SetThemeDialog component.
   // This is necessary for the parent component to be able to call methods on the SetThemeDialog component.
   // The _ parameter is used to align the component signature with the forwardRef function.
-  (_, ref) => {
+  ({ appName = 'Steago' }, ref) => {
     /**
      * ----------------------------------------------------------------------------------------------
      * Setup
@@ -97,7 +99,7 @@ const SetThemeDialog = forwardRef<SetThemeDialogRef, SetThemeDialogProps>(
         <Dialog size="sm" open={isOpen} onClose={closeDialog}>
           <DialogTitle>Set theme</DialogTitle>
           <DialogDescription>
-            What&apos;s your favorite way to use Steago?
+            What&apos;s your favorite way to use {appName}?
           </DialogDescription>
           <DialogBody>
             <Field>
