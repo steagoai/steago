@@ -22,11 +22,11 @@ export default function FullPageAlert({
         <div>
           <div className="mb-2 flex  flex-row items-center justify-center text-base text-emerald-700 dark:text-emerald-300/75">
             <img
-              src="/images/steago-logo.png"
-              alt="Steago Logo"
+              src={process.env.NEXT_PUBLIC_APP_LOGO_URL ?? '/images/logo.png'}
+              alt="Logo"
               className="size-6"
             />
-            Steago
+            {process.env.NEXT_PUBLIC_APP_NAME ?? 'App'}
           </div>
           {alertLabel}
         </div>

@@ -36,11 +36,11 @@ export default function FullPageCard({
       <div className="flex justify-center sm:mx-auto sm:w-full sm:max-w-md">
         <img
           className="me-4 h-9 w-auto rounded-lg"
-          src="/images/steago-logo-dark.png"
-          alt="Steago Logo"
+          src={process.env.NEXT_PUBLIC_APP_LOGO_DARK_URL ?? '/images/logo.png'}
+          alt="Logo"
         />
         <h2 className="my-auto me-2 flex items-center gap-1 text-center text-xl font-medium leading-9 tracking-tight text-zinc-900 dark:text-zinc-100">
-          <span>Steago Cloud</span>
+          <span>{process.env.NEXT_PUBLIC_APP_NAME ?? 'App'}</span>
           <span className="text-2xl text-zinc-400 dark:text-zinc-500">
             <RxSlash />
           </span>
