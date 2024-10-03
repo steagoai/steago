@@ -1,6 +1,7 @@
 'use client';
 
 import * as Headless from '@headlessui/react';
+import clsx from 'clsx';
 import React, { useState } from 'react';
 import { NavbarItem } from './navbar';
 
@@ -53,15 +54,24 @@ export function StackedLayout({
   sidebar,
   mobileTitle,
   children,
+  className,
+  innerContainerClassName,
 }: React.PropsWithChildren<{
   navbar: React.ReactNode;
   sidebar: React.ReactNode;
   mobileTitle: string | React.ReactNode;
+  className?: string;
+  innerContainerClassName?: string;
 }>) {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <div className="relative isolate flex min-h-svh w-full flex-col bg-white lg:bg-zinc-100 dark:bg-zinc-950 dark:lg:bg-zinc-900">
+    <div
+      className={clsx(
+        'relative isolate flex min-h-[calc(100svh-120px)] w-full flex-col bg-white lg:bg-zinc-100 dark:bg-zinc-950 dark:lg:bg-zinc-900',
+        className
+      )}
+    >
       {/* Sidebar on mobile */}
       <MobileSidebar open={showSidebar} close={() => setShowSidebar(false)}>
         {sidebar}
@@ -83,7 +93,12 @@ export function StackedLayout({
 
       {/* Content */}
       <main className="flex flex-1 flex-col pb-2 lg:px-2">
-        <div className="h-[calc(100vh-64px)] grow overflow-y-scroll p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-sm lg:ring-1 lg:ring-zinc-950/5 dark:bg-zinc-950 dark:lg:ring-white/10">
+        <div
+          className={clsx(
+            'h-[calc(100vh-68px)] grow overflow-y-scroll p-6 lg:rounded-lg lg:bg-white lg:p-10 lg:shadow-sm lg:ring-1 lg:ring-zinc-950/5 dark:bg-zinc-950 dark:lg:ring-white/10',
+            innerContainerClassName
+          )}
+        >
           <div className="mx-auto max-w-7xl">{children}</div>
         </div>
       </main>
